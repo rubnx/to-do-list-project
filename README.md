@@ -1,6 +1,8 @@
 ## Simple ToDo List Project
 
-This projects presents a simple ToDo list coded in Vanilla Javascript, HTML and CSS.
+This project is a simple ToDo list coded in Vanilla Javascript, HTML and CSS.
+
+Is one of my first projects done on my own, using the techniques I've been learning.
 
 Features:
 
