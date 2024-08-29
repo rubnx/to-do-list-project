@@ -1,3 +1,4 @@
+// Initial Test Data
 const initialTasks = [
   {
     id: '1',
@@ -26,6 +27,9 @@ const initialTasks = [
   },
 ];
 
+// APPLICATION ARCHITECTURE
+
+// Select necessary elements in the DOM
 const formAddTask = document.querySelector('.form-add-task');
 const formInput = document.querySelector('.form-add-task input');
 const btnAddTask = document.querySelector('.add-btn');
@@ -35,34 +39,43 @@ const btnDeleteTask = document.querySelector('.delete-btn');
 const taskList = document.querySelector('.task-list');
 const taskListFinished = document.querySelector('.task-list-finished');
 
+// Form Add Task Event Listener
 formAddTask.addEventListener('submit', addNewTask);
 
+// Create and initiate task array
 let tasks = initialTasks;
 
+// Adding a new task
 function addNewTask(e) {
   e.preventDefault();
 
+  // Input should not be empty
   if (formInput.value === '') {
     clearForm();
     return;
   }
 
+  // Create new task object
   const newTask = {
     id: crypto.randomUUID(),
     description: formInput.value,
     finished: false,
   };
 
+  // Update tasks
   tasks = [...tasks, newTask];
 
+  // Re-render everything and clear form
   renderUI();
   clearForm();
 }
 
+// Clear form function
 function clearForm() {
   formInput.value = '';
 }
 
+// Re-renders the list of unfinished tasks
 function renderTaskList() {
   taskList.innerHTML =
     tasks.filter((task) => task.finished === false).length > 0
@@ -70,10 +83,13 @@ function renderTaskList() {
       : '<div class="message"><span>🙃</span> Start adding some tasks</div>';
 }
 
+// Re-renders the list of finished tasks
 function renderFinishedTaskList() {
   taskListFinished.innerHTML = markupTasksFinished(tasks);
 }
 
+// Create event listeners that will be re-created everytime the task list re-renders
+// Generates a checkbox event listener for every task in the list
 function addCheckboxListeners() {
   document
     .querySelectorAll('input[type="checkbox"]')
@@ -82,13 +98,16 @@ function addCheckboxListeners() {
     );
 }
 
+// Generates a click event listener for the delete button in every task in the list
 function addDeleteButtonListeners() {
   document
     .querySelectorAll('.delete-btn')
     .forEach((btn) => btn.addEventListener('click', deleteTask));
 }
 
+// Mark a task as finished
 function setTaskAsFinished(e) {
+  // We find the closest parent with 'task' class because it contains the task id
   const targetEl = e.target.closest('.task');
 
   tasks = tasks.map((task) =>
@@ -99,13 +118,25 @@ function setTaskAsFinished(e) {
   renderUI();
 }
 
+// Completely delete a task from the list
+function deleteTask(e) {
+  // We find the closest parent with 'task' class because it contains the task id
+  const targetEl = e.target.closest('.task');
+
+  tasks = tasks.filter((task) => task.id !== targetEl.getAttribute('data-id'));
+  renderUI();
+}
+
+// Re-render all tasks in the UI
 function renderUI() {
   renderTaskList();
   renderFinishedTaskList();
+  // Add listeners for the re-rendered elements
   addCheckboxListeners();
   addDeleteButtonListeners();
 }
 
+// Markup for unfinished tasks
 function markupTasks(taskArray) {
   return taskArray
     .filter((task) => task.finished === false)
@@ -122,6 +153,7 @@ function markupTasks(taskArray) {
     .join('');
 }
 
+// Markup for finished tasks
 function markupTasksFinished(taskArray) {
   return taskArray
     .filter((task) => task.finished === true)
@@ -138,10 +170,5 @@ function markupTasksFinished(taskArray) {
     .join('');
 }
 
-function deleteTask(e) {
-  const targetEl = e.target.closest('.task');
-  tasks = tasks.filter((task) => task.id !== targetEl.getAttribute('data-id'));
-  renderUI();
-}
-
+// Start the app by rendering the current tasks in the UI (initial tasks or empty array)
 renderUI();
