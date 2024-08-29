@@ -1,41 +1,10 @@
-// Initial Test Data
-const initialTasks = [
-  {
-    id: '1',
-    description: 'Complete the project proposal',
-    finished: false,
-  },
-  {
-    id: '2',
-    description: 'Search for simple coding projects',
-    finished: false,
-  },
-  {
-    id: '3',
-    description: 'Start ToDo list project',
-    finished: true,
-  },
-  {
-    id: '4',
-    description: 'Test new app',
-    finished: true,
-  },
-  {
-    id: '5',
-    description: 'Fix app bugs',
-    finished: false,
-  },
-];
+import initialTasks from './data/initialTasks.js';
 
 // APPLICATION ARCHITECTURE
 
 // Select necessary elements in the DOM
 const formAddTask = document.querySelector('.form-add-task');
 const formInput = document.querySelector('.form-add-task input');
-const btnAddTask = document.querySelector('.add-btn');
-const checklistItem = document.querySelector('.checklist-item');
-const inputCheck = document.querySelector('.checklist-item input');
-const btnDeleteTask = document.querySelector('.delete-btn');
 const taskList = document.querySelector('.task-list');
 const taskListFinished = document.querySelector('.task-list-finished');
 
@@ -44,6 +13,7 @@ formAddTask.addEventListener('submit', addNewTask);
 
 // Create and initiate task array
 let tasks = initialTasks;
+// let tasks = [];
 
 // Adding a new task
 function addNewTask(e) {
