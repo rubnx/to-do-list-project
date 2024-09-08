@@ -3,8 +3,8 @@ import initialTasks from './data/initialTasks.js';
 // APPLICATION ARCHITECTURE
 
 // Select necessary elements in the DOM
-const formAddTask = document.querySelector('.form-add-task');
-const formInput = document.querySelector('.form-add-task input');
+const formAddTask = document.querySelector('.form');
+const formInput = document.querySelector('.form input');
 const taskList = document.querySelector('.task-list');
 const taskListFinished = document.querySelector('.task-list-finished');
 
