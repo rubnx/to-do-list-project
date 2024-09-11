@@ -129,7 +129,7 @@
 .task-list-finished {
   display: flex;
   flex-direction: column;
-  background-color: var(--color-02);
+  background-color: var(--color-05);
 }
 
 .task-list-finished div:last-child {

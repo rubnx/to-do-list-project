@@ -21,7 +21,6 @@ function addNewTask(e) {
 
   // Input should not be empty
   if (formInput.value === '') {
-    clearForm();
     return;
   }
 
